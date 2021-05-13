@@ -64,7 +64,7 @@ bool findIntersection(Vec3 origin, Vec3 direction, Sphere &s, float &t0, float &
     return true;
 }
 
-Vec3 trace(Vec3 origin, Vec3 direction, std::vector<Sphere> objects, int depth) {
+Vec3 trace(Vec3 origin, Vec3 direction, std::vector<Sphere> objects) {
     float tNearest = INF;
     Sphere *hit = NULL;
     for (int i = 0; i < objects.size(); i++) {
@@ -113,7 +113,7 @@ void render(std::vector<Sphere> objects) {
             float x = (j + 0.5 - IMAGE_HEIGHT / 2) / IMAGE_WIDTH;
             float y = (i + 0.5 - IMAGE_WIDTH / 2) / IMAGE_WIDTH;
             Vec3 primaryRay(x, y, 1); // Changing z value affects the FOV
-            img[imgIndex] = trace(origin, primaryRay.normalize(), objects, 0);
+            img[imgIndex] = trace(origin, primaryRay.normalize(), objects);
             imgIndex++;
         }
     }
